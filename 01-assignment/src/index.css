@@ -2,27 +2,27 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: linear-gradient(140deg, #FF7979, #4294C1, #FF7979);
-  background-size: 200% 200%;
-  -webkit-animation: AnimationName 24s ease infinite;
-  -moz-animation: AnimationName 24s ease infinite;
-  animation: AnimationName 24s ease infinite;
-  
-  @-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  @-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  @keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
+  background: linear-gradient(-45deg, orange, skyblue, pink);
+  background-size: 300% 300%;
+  -webkit-animation: Gradient 34s ease infinite;
+  -moz-animation: Gradient 34s ease infinite;
+  animation: Gradient 34s ease infinite;
 }
+  
+  @-webkit-keyframes Gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  @-moz-keyframes Gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  @keyframes Gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
 
 
