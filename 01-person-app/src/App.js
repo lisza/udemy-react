@@ -28,14 +28,17 @@ class App extends Component {
       this.setState({ persons: persons })
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Max', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stephanie', age: 26 }
-      ]
-    });
+  nameChangedHandler = (event, personIndex) => {
+    // Same as above: don't mutate state, make a copy.
+    // Alternative: Object.assign({}, this.state.persons[personIndex]);
+    const person = { ...this.state.persons[personIndex] };
+    person.name = event.target.value;
+    // Again, work with a copy of the state:
+    const persons = [...this.state.persons];
+    // Mutate the copy:
+    persons[personIndex] = person;
+    // setState property to the new array:
+    this.setState({ persons: persons });
   };
 
   togglePersonsHandler = () => {
@@ -60,7 +63,7 @@ class App extends Component {
     // Outsource the check for showPersons outside the return()
     // to keep our code with conditional statements cleaner.
     // We can define what persons returns here in regular js,
-    // then just subsitute persons down in the return.
+    // then just output the persons variable down in the return.
     let persons = null;
 
     if (this.state.showPersons) {
@@ -69,9 +72,10 @@ class App extends Component {
           { this.state.persons.map((person, index) => {
             return <Person
               click={this.deletePersonHandler.bind(this, index)}
-              key={`person-${index}`}
+              changed={(event) => this.nameChangedHandler(event, index)}
               name={person.name}
-              age={person.age} />
+              age={person.age}
+              key={`person-${index}`}/>
           }) }
         </div>
       );
