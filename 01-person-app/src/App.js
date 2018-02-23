@@ -53,9 +53,10 @@ class App extends Component {
     // style is a normal js variable/ object.
     // These styles are scoped to only this component.
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
-      border: '1px solid skyblue',
+      // border: '1px solid skyblue',
       padding: '8px',
       cursor: 'pointer'
     };
@@ -79,6 +80,8 @@ class App extends Component {
           }) }
         </div>
       );
+
+      style.backgroundColor = 'red';
     }
 
     return (
