@@ -19,6 +19,7 @@
 import React from 'react';
 // No need to import { Component } since this is a functional component
 // that doesn't use "extend React.Component"
+import Radium from 'radium';
 import './Person.css';
 
 const person = (props) => {
@@ -31,4 +32,4 @@ const person = (props) => {
   );
 };
 
-export default person;
+export default Radium(person);

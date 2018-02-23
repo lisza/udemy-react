@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -52,13 +53,20 @@ class App extends Component {
   render() {
     // style is a normal js variable/ object.
     // These styles are scoped to only this component.
+    // Also: no pseudo selectors, e.g. :hover, in inline styles.
+    // We imported Radium to be able to use pseudo selectors in inline styles
     const style = {
       backgroundColor: 'green',
       color: 'white',
       font: 'inherit',
       // border: '1px solid skyblue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover':  {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+      // With Radium we can add pseudo selectors in quotes like above.
     };
 
     // Outsource the check for showPersons outside the return()
@@ -84,6 +92,10 @@ class App extends Component {
       // Style button backgroundColor conditionally based on
       // if (this.state.showPersons) statement above.
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     }
 
     // Array of css classNames to create a valid css classNames list
@@ -95,7 +107,6 @@ class App extends Component {
     if (this.state.persons.length <= 1) {
       classes.push('bold'); // classes =  ['red', 'bold']
     }
-
 
     return (
       <div className="App">
@@ -116,4 +127,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
