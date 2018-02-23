@@ -81,13 +81,26 @@ class App extends Component {
         </div>
       );
 
+      // Style button backgroundColor conditionally based on
+      // if (this.state.showPersons) statement above.
       style.backgroundColor = 'red';
     }
+
+    // Array of css classNames to create a valid css classNames list
+    // (using join(' ') later when assigned):
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); // classes =  ['red', 'bold']
+    }
+
 
     return (
       <div className="App">
         <h1>Hi, I am a React App</h1>
-        <p>This is really working!</p>
+        <p className={classes.join(' ')}>This is really working!</p>
 
         <button
           style={style}
