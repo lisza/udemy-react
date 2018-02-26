@@ -20,7 +20,7 @@ import React from 'react';
 // No need to import { Component } since this is a functional component
 // that doesn't use "extend React.Component"
 // import Radium from 'radium';
-import './Person.css';
+import styles from './Person.css';
 
 const person = (props) => {
   // const style = {
@@ -31,7 +31,7 @@ const person = (props) => {
   // };
 
   return (
-    <div className="Person" style={style}>
+    <div className={styles.Person}>
       <p onClick={props.click}>I am {props.name} and I am {props.age} years old!</p>
       <p>{props.children}</p>
       <input type="text" onChange={props.changed} value={props.name} />

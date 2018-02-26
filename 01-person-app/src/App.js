@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+// About CSS modules: https://github.com/css-modules/css-modules
+import styles from './App.css';
 // import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
@@ -55,25 +56,21 @@ class App extends Component {
     // These styles are scoped to only this component.
     // Also: no pseudo selectors, e.g. :hover, in inline styles.
     // We imported Radium to be able to use pseudo selectors in inline styles
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      // border: '1px solid skyblue',
-      padding: '8px',
-      cursor: 'pointer',
-      // ':hover':  {
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black'
-      // }
-      // With Radium we can add pseudo selectors in quotes like above.
-    };
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   // border: '1px solid skyblue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    // };
 
     // Outsource the check for showPersons outside the return()
     // to keep our code with conditional statements cleaner.
     // We can define what persons returns here in regular js,
     // then just output the persons variable down in the return.
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -89,38 +86,41 @@ class App extends Component {
         </div>
       );
 
+      // NEW, with css modules:
+      // styles.Red translates to a string after processing
+      btnClass = styles.Red;
+
+      // OLD:
       // Style button backgroundColor conditionally based on
       // if (this.state.showPersons) statement above.
-      style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // };
+      // style.backgroundColor = 'red';
     }
 
     // Array of css classNames to create a valid css classNames list
     // (using join(' ') later when assigned):
     const classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red'); // classes = ['red']
+      classes.push(styles.red); // classes = ['red']
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold'); // classes =  ['red', 'bold']
+      classes.push(styles.bold); // classes =  ['red', 'bold']
     }
 
+    // Using CSS modules: styles.App refers to an automatically
+    // generated App property on the imported styles object. That
+    // property will in the end simply hold a value like App__App__ah5_1,
+    // a generated class name string.
     return (
-      // <StyleRoot>
-        <div className="App">
+        <div className={styles.App}>
           <h1>Hi, I am a React App</h1>
           <p className={classes.join(' ')}>This is really working!</p>
 
           <button
-            style={style}
+          className={btnClass}
             onClick={this.togglePersonsHandler}>Toggle Persons</button>
 
           {persons}
         </div>
-      // </StyleRoot>
     );
     // Compiles to JavaScript and is equivalent to this:
     // return React.createElement('div', {className: 'App'},
