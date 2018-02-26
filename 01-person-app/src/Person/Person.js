@@ -19,16 +19,16 @@
 import React from 'react';
 // No need to import { Component } since this is a functional component
 // that doesn't use "extend React.Component"
-import Radium from 'radium';
+// import Radium from 'radium';
 import './Person.css';
 
 const person = (props) => {
-  const style = {
-    // Use radium to write media queries inline
-    '@media (min-width: 500px)': {
-      width: '450px'
-    }
-  };
+  // const style = {
+  //   // Use radium to write media queries inline
+  //   '@media (min-width: 500px)': {
+  //     width: '450px'
+  //   }
+  // };
 
   return (
     <div className="Person" style={style}>
@@ -39,4 +39,4 @@ const person = (props) => {
   );
 };
 
-export default Radium(person);
+export default person;

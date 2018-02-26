@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -62,10 +62,10 @@ class App extends Component {
       // border: '1px solid skyblue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover':  {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      // ':hover':  {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black'
+      // }
       // With Radium we can add pseudo selectors in quotes like above.
     };
 
@@ -92,10 +92,10 @@ class App extends Component {
       // Style button backgroundColor conditionally based on
       // if (this.state.showPersons) statement above.
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // };
     }
 
     // Array of css classNames to create a valid css classNames list
@@ -109,7 +109,7 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
+      // <StyleRoot>
         <div className="App">
           <h1>Hi, I am a React App</h1>
           <p className={classes.join(' ')}>This is really working!</p>
@@ -120,7 +120,7 @@ class App extends Component {
 
           {persons}
         </div>
-      </StyleRoot>
+      // </StyleRoot>
     );
     // Compiles to JavaScript and is equivalent to this:
     // return React.createElement('div', {className: 'App'},
@@ -129,4 +129,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default App;
