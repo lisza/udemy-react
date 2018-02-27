@@ -29,6 +29,10 @@ const person = (props) => {
   //     width: '450px'
   //   }
   // };
+  const random = Math.random();
+  if (random > 0.7) {
+    throw new Error('A Fake Error to test erroring!')
+  }
 
   return (
     <div className={styles.Person}>
