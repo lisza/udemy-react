@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 // About CSS modules: https://github.com/css-modules/css-modules
-import styles from './App.css';
 // import Radium, { StyleRoot } from 'radium';
-import Persons from '../components/Persons/Persons';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import styles from './App.css';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+
 
 class App extends Component {
   state = {
@@ -71,37 +73,12 @@ class App extends Component {
     // We can define what persons returns here in regular js,
     // then just output the persons variable down in the return.
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          <Persons
-            persons={this.state.persons}
-            clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler}
-          />
-        </div>
-      );
-
-      // NEW, with css modules:
-      // styles.Red translates to a string after processing
-      btnClass = styles.Red;
-
-      // OLD:
-      // Style button backgroundColor conditionally based on
-      // if (this.state.showPersons) statement above.
-      // style.backgroundColor = 'red';
-    }
-
-    // Array of css classNames to create a valid css classNames list
-    // (using join(' ') later when assigned):
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push(styles.red); // classes = ['red']
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push(styles.bold); // classes =  ['red', 'bold']
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler} />
     }
 
     // Using CSS modules: styles.App refers to an automatically
@@ -110,13 +87,11 @@ class App extends Component {
     // a generated class name string.
     return (
         <div className={styles.App}>
-          <h1>Hi, I am a React App</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-
-          <button
-          className={btnClass}
-            onClick={this.togglePersonsHandler}>Toggle Persons</button>
-
+          <Cockpit
+            clicked={this.togglePersonsHandler}
+            persons={this.state.persons}
+            show={this.state.showPersons}
+          />
           {persons}
         </div>
     );
