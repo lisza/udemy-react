@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // About CSS modules: https://github.com/css-modules/css-modules
 import styles from './App.css';
 // import Radium, { StyleRoot } from 'radium';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
@@ -76,14 +76,11 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          { this.state.persons.map((person, index) => {
-            return <Person
-                click={this.deletePersonHandler.bind(this, index)}
-                changed={(event) => this.nameChangedHandler(event, index)}
-                name={person.name}
-                age={person.age}
-                key={`person-${index}`} />
-          }) }
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+          />
         </div>
       );
 
