@@ -16,13 +16,25 @@
 // of the component <Person>Some text that will be props.children</Person>
 // where used in the parent component (in 'App' in this case).
 
-import React from 'react';
+import React, { Component } from 'react';
 // No need to import { Component } since this is a functional component
 // that doesn't use "extend React.Component"
 // import Radium from 'radium';
 import styles from './Person.css';
 
-const person = (props) => {
+class Person extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[Person.js] Inside Constructor', props);
+  }
+
+  componentWillMount() {
+    console.log('[Person.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[Person.js] Inside componentDidMount()');
+  }
   // const style = {
   //   // Use radium to write media queries inline
   //   '@media (min-width: 500px)': {
@@ -35,14 +47,17 @@ const person = (props) => {
   // if (random > 0.7) {
   //   throw new Error('A Fake Error to test erroring!')
   // }
+  render() {
+    console.log('[Person.js] Inside render()');
 
-  return (
-    <div className={styles.Person}>
-      <p onClick={props.click}>I am {props.name} and I am {props.age} years old!</p>
-      <p>{props.children}</p>
-      <input type="text" onChange={props.changed} value={props.name} />
-    </div>
-  );
-};
+    return (
+      <div className={styles.Person}>
+        <p onClick={this.props.click}>I am {this.props.name} and I am {this.props.age} years old!</p>
+        <p>{this.props.children}</p>
+        <input type="text" onChange={this.props.changed} value={this.props.name} />
+      </div>
+    );
+  }
+}
 
-export default person;
+export default Person;

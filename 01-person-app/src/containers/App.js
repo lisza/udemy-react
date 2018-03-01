@@ -8,6 +8,43 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
+  // The constructor method is optional. When we don't have it,
+  // React automatically provides us with props that we can access via
+  // this.props. It supers the props for us in the background.
+  // If we do use the constructor however, we overwrite this default
+  // and we need to include the call
+  // to super(props) to make the props available. Inside the constructor,
+  // we can call just props, outside of it it's this.props.
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+    // this.state = {}
+    // Can initialize state inside constructor with this.state, but
+    // but outside of it with just state = {} is fine as well (a newer
+    // option in createReactApp (?))
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside shouldComponentUpdate');
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] Inside componentDidUpdate');
+  App
+
   state = {
     persons: [
       { name: 'Max', age: 28 },
@@ -54,7 +91,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
+  // render() is the only mandatory method
   render() {
+    console.log('[App.js] Inside render()');
+
     // style is a normal js variable/ object.
     // These styles are scoped to only this component.
     // Also: no pseudo selectors, e.g. :hover, in inline styles.
