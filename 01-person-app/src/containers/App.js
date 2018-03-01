@@ -18,7 +18,16 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[App.js] Inside Constructor', props);
-    // this.state = {}
+    this.state = {
+        persons: [
+          { name: 'Max', age: 28 },
+          { name: 'Manu', age: 29 },
+          { name: 'Stephanie', age: 26 }
+        ],
+        otherState: 'Some other value',
+        showPersons: false,
+        toggleClickCounter: 0
+    }
     // Can initialize state inside constructor with this.state, but
     // but outside of it with just state = {} is fine as well (a newer
     // option in createReactApp (?))
@@ -46,16 +55,6 @@ class App extends PureComponent {
 
   componentDidUpdate() {
     console.log('[UPDATE App.js] Inside componentDidUpdate');
-  }
-
-  state = {
-    persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
-    ],
-    otherState: 'Some other value',
-    showPersons: false
   }
 
   // Good practice to call methods that are event handlers "Handler"
@@ -91,7 +90,17 @@ class App extends PureComponent {
     // setState's changes get merged into state by React, so we can
     // selectively set only the property we want to change without
     // worrying about the rest.
-    this.setState({ showPersons: !doesShow });
+    // this.setState({ showPersons: !doesShow });
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClickCounter: prevState.toggleClickCounter + 1
+      }
+    });
+    // Better way to setState, to prevent problems with asynchronous
+    // setState updates of the state elsewhere in the app. This way
+    // there is no danger from other state version, since we have
+    // prevState to update.
   }
 
   // render() is the only mandatory method
