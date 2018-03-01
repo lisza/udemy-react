@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // About CSS modules: https://github.com/css-modules/css-modules
 // import Radium, { StyleRoot } from 'radium';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
@@ -7,7 +7,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 
-class App extends Component {
+class App extends PureComponent {
   // The constructor method is optional. When we don't have it,
   // React automatically provides us with props that we can access via
   // this.props. It supers the props for us in the background.
@@ -32,10 +32,13 @@ class App extends Component {
     console.log('[App.js] Inside componentDidMount()');
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[UPDATE App.js] Inside shouldComponentUpdate');
-    return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[UPDATE App.js] Inside shouldComponentUpdate');
+  //   // return true;
+  //   return nextState.persons !== this.state.persons ||
+  //     nextState.showPersons !== this.state.showPersons;
+  // }
+  // Replace with PureComponent import instead.
 
   componentWillUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState);
@@ -43,7 +46,7 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log('[UPDATE App.js] Inside componentDidUpdate');
-  App
+  }
 
   state = {
     persons: [
@@ -127,6 +130,7 @@ class App extends Component {
     // a generated class name string.
     return (
         <div className={styles.App}>
+          <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
           <Cockpit
             appTitle={this.props.title}
             clicked={this.togglePersonsHandler}

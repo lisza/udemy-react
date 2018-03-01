@@ -1,10 +1,10 @@
 // Functional component that receives props
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
 // Use one-line arrow function with implicit return,
 // use parentheses to make it a multi-liner
-class Persons extends Component {
+class Persons extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[Persons.js] Inside Constructor', props);
@@ -27,10 +27,13 @@ class Persons extends Component {
   // Can be used for performance improvements with a check for if certain
   // relevant props changed, so that a component doens't update for
   // every single prop change always if that change doesn't need a re-render.
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[UPDATE Persons.js] Inside shouldComponentUpdate');
-    return nextProps.persons !== this.props.persons;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[UPDATE Persons.js] Inside shouldComponentUpdate');
+  //   return nextProps.persons !== this.props.persons;
+  //   // return true;
+  // }
+  // replace with imported PureComponent, does that performance check
+  // automatically
 
   componentWillUpdate(nextProps, nextState) {
     console.log('[UPDATE Persons.js] Inside componentWillUpdate', nextProps, nextState);
